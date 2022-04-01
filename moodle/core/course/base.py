@@ -223,8 +223,8 @@ class BaseCourse(BaseMoodle):
         )
         return self._trs(Course, res)
 
-    def get_enrolled_users_by_cmid(self):
-        res = self.moodle.post("core_course_get_enrolled_users_by_cmid")
+    def get_enrolled_users_by_cmid(self, cmid: int, groupid: int):
+        res = self.moodle.post("core_course_get_enrolled_users_by_cmid", cmid=cmid, groupid=groupid)
         return res
 
     def get_module(self):
