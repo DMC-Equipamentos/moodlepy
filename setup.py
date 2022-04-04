@@ -32,7 +32,7 @@ with codecs.open("README.md", "r", "utf-8") as fd:
         author="Habib Rohman",
         author_email="habibrohman@protonmail.com",
         license="MIT",
-        url="https://github.com/hexatester/moodlepy",
+        url="https://github.com/DMC-Equipamentos/moodlepy",
         description="Python wrapper for moodle web service.",
         long_description=fd.read(),
         classifiers=[
