@@ -90,6 +90,7 @@ class BaseUser(BaseMoodle):
             "core_user_create_users",
             users=users,
         )
+        print("Usuário Cadastrado")
         return self._trs(CreateUser.Response, data)
 
     def delete_users(self, userids: List[int]) -> None:
@@ -99,12 +100,14 @@ class BaseUser(BaseMoodle):
             userids (List[int]): list of user ID
 
         Returns:
-            None: None
+            # None: None
+            None: "Usuário deletado."
         """
         data = self.moodle.post(
             "core_user_delete_users",
             userids=userids,
         )
+        print("Usuário Deletado")
         return data
 
     def get_course_user_profiles(self, userlist: List[UserList]) -> List[UserProfile]:
@@ -169,8 +172,21 @@ class BaseUser(BaseMoodle):
         data = self.moodle.post("core_user_update_user_preferences")
         return data
 
-    def update_users(self):
-        data = self.moodle.post("core_user_update_users")
+    def update_users(self, users: List[CreateUser]):
+        """Update users.
+
+        Args:
+            users: List[CreateUser]): list of user ID
+
+        Returns:
+            # None: None
+            None: "Usuário atualizado."
+        """
+        data = self.moodle.post(
+            "core_user_update_users", 
+            users=users,
+            )
+        print("Usuário atualizado")
         return data
 
     def view_user_list(self):
