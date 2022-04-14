@@ -84,7 +84,7 @@ class BaseEnrol(BaseMoodle):
             courseid=courseid,
             options=options,
         )
-        return self._trs(EnrolledUser, data)
+        return data
 
     def get_enrolled_users_with_capability(
         self,
