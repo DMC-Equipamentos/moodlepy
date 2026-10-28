@@ -2,7 +2,7 @@ from .activity_overview import ActivityOverview
 from .check_updates import CheckUpdate
 from .content_option import ContentOption
 from .course_capability import CourseCapability
-from .course import Course, CourseByField, SearchResult
+from .course import Course, CourseByField, CourseFile, SearchResult
 from .course import CourseBTC, CoursesBTC
 from .category import Category
 from .content import (
@@ -27,6 +27,7 @@ __all__ = [
     "CourseCapability",
     "Course",
     "CourseByField",
+    "CourseFile",
     "SearchResult",
     "CourseBTC",
     "CoursesBTC",

@@ -34,6 +34,26 @@ class CourseCustomField:
 
 
 @dataclass
+class CourseFile:
+    """Course File (overview image or summary file)
+    Args:
+        filename (str): file name
+        filepath (str): file path
+        filesize (int): file size in bytes
+        fileurl (str): webservice download url (needs the token, or replace webservice/pluginfile.php with pluginfile.php)
+        timemodified (int): timestamp when the file was modified
+        mimetype (Optional[str]): file mime type
+    """
+
+    filename: str
+    filepath: str
+    filesize: int
+    fileurl: str
+    timemodified: int
+    mimetype: Optional[str] = None
+
+
+@dataclass
 class Course:
     """Course
     Args:
@@ -67,6 +87,10 @@ class Course:
         hiddensections (Optional[int]): (deprecated, use courseformatoptions) How the hidden sections in the course are displayed to students
         courseformatoptions (List[CourseFormatOption]): additional options for particular course format
         customfields (List[CourseCustomField]): Custom fields and associated values
+        categoryname (Optional[str]): category name (only in get_courses_by_field)
+        enrollmentmethods (List[str]): enabled enrolment plugins, e.g. manual, self (only in get_courses_by_field)
+        overviewfiles (List[CourseFile]): course image files (only in get_courses_by_field)
+        summaryfiles (List[CourseFile]): files embedded in the summary (only in get_courses_by_field)
     """
 
     id: int
@@ -99,6 +123,10 @@ class Course:
     hiddensections: Optional[int] = None
     courseformatoptions: List[CourseFormatOption] = field(factory=list)
     customfields: List[CourseCustomField] = field(factory=list)
+    categoryname: Optional[str] = None
+    enrollmentmethods: List[str] = field(factory=list)
+    overviewfiles: List[CourseFile] = field(factory=list)
+    summaryfiles: List[CourseFile] = field(factory=list)
 
     @dataclass
     class ToCheck:

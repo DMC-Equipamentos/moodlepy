@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from moodle import BaseMoodle, MoodleWarning
 from . import (
@@ -6,6 +6,7 @@ from . import (
     Criteria,
     CreateUser,
     GetUsersResponse,
+    User,
     UserList,
     UserProfile,
 )
@@ -152,9 +153,18 @@ class BaseUser(BaseMoodle):
         )
         return self._tr(GetUsersResponse, **data)
 
-    def get_users_by_field(self):
-        data = self.moodle.post("core_user_get_users_by_field")
-        return data
+    def get_users_by_field(self, field: str, values: List[Union[int, str]]) -> List[User]:
+        """Retrieve users' information for a specified unique field.
+
+        Args:
+            field (str): the search field can be 'id' or 'idnumber' or 'username' or 'email'
+            values (List[Union[int, str]]): the values to match
+
+        Returns:
+            List[User]: the users found (missing values are ignored)
+        """
+        data = self.moodle.post("core_user_get_users_by_field", field=field, values=values)
+        return self._trs(User, data)
 
     def remove_user_device(self):
         data = self.moodle.post("core_user_remove_user_device")
